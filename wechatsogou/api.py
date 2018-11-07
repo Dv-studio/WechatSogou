@@ -21,7 +21,7 @@ from wechatsogou.structuring import WechatSogouStructuring
 
 
 class WechatSogouAPI(object):
-    def __init__(self, captcha_break_time=1, **kwargs):
+    def __init__(self, captcha_break_time=1, headers=None, **kwargs):
         """初始化参数
 
         Parameters
@@ -37,6 +37,7 @@ class WechatSogouAPI(object):
 
         self.captcha_break_times = captcha_break_time
         self.requests_kwargs = kwargs
+        self.headers = headers
 
     def __set_cookie(self, suv=None, snuid=None, referer=None):
         suv = ws_cache.get('suv') if suv is None else suv
@@ -44,6 +45,8 @@ class WechatSogouAPI(object):
         _headers = {'Cookie': 'SUV={};SNUID={};'.format(suv, snuid)}
         if referer is not None:
             _headers['Referer'] = referer
+        if self.headers:
+            _headers.update(self.headers)
         return _headers
 
     def __set_cache(self, suv, snuid):
