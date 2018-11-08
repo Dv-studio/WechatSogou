@@ -8,7 +8,7 @@ history = codecs.open('docs/HISTORY.rst', encoding='utf-8').read()
 
 setup(
     name='wechatsogou',
-    version='4.3.1',
+    version='4.3.2',
     description='Api for wechat mp with sogou',
     long_description=u'\n\n'.join([readme, history]),
     author='Chyroc',
