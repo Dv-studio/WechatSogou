@@ -56,6 +56,8 @@ class WechatSogouAPI(object):
     def __get(self, url, session, headers):
         resp = session.get(url, headers=headers, **self.requests_kwargs)
 
+        if resp.status_code == 302:
+            resp = session.get(resp.headers['Location'], headers=headers, **self.requests_kwargs)
         if not resp.ok:
             raise WechatSogouRequestsException('WechatSogouAPI get error', resp)
 
